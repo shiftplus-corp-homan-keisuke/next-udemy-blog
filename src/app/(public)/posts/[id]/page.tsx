@@ -1,5 +1,4 @@
 import { getPost } from "@/lib/post";
-import { get } from "http";
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,13 +8,13 @@ import { ja } from "date-fns/locale";
 import NotFound from "./not-found";
 
 type Params = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function PostPage({ params }: Params) {
-  const { id } = params;
+  const { id } = await params;
   const post = await getPost(id);
   if (!post) {
     return <NotFound />;

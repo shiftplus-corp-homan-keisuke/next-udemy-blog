@@ -11,7 +11,6 @@ type SearchProps = {
 export default async function PostsPage({ searchParams }: SearchProps) {
   const resolvedSearchParams = await searchParams;
   const query = resolvedSearchParams?.search;
-  console.log(query);
 
   const posts = query
     ? ((await searchPosts(query)) as Post[])
